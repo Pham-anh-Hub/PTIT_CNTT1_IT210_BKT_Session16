@@ -4,10 +4,11 @@ import bkt_session16.ptit_cntt1_it210_bkt_session16.model.Wallet;
 import bkt_session16.ptit_cntt1_it210_bkt_session16.repository.ITransactionHistoryRepository;
 import bkt_session16.ptit_cntt1_it210_bkt_session16.repository.IWalletRepository;
 import bkt_session16.ptit_cntt1_it210_bkt_session16.service.IWalletService;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.aspectj.apache.bcel.classfile.Module;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -44,8 +45,11 @@ public class WalletServiceImpl implements IWalletService {
 
     }
 
+
     @Override
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void saveSystemLog(String message) {
-        Propagation
+        // giả lập lưu log vào DB
+        System.out.println("LOG: " + message);
     }
 }
